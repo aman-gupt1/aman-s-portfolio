@@ -1,0 +1,51 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 430 >>
+stream
+BT
+/F1 22 Tf
+50 720 Td
+(AMAN GUPTA - FRONTEND DEVELOPER) Tj
+/F1 11 Tf
+0 -26 Td
+(Email: amangupta276302@gmail.com | Phone: +91 99358 15825 | Noida, UP) Tj
+0 -20 Td
+(LinkedIn: linkedin.com/in/amangupt1 | GitHub: github.com/aman-gupt1) Tj
+0 -28 Td
+(EDUCATION: B.Tech CSE (2022-2026) - CGPA: 6.9) Tj
+0 -28 Td
+(EXPERIENCE: MERN Stack Developer Intern at WebMobril Technologies) Tj
+0 -18 Td
+(Worked on responsive web interfaces using React, Tailwind CSS and Node.js) Tj
+0 -28 Td
+(SKILLS: React, JavaScript, HTML5, CSS3, Tailwind CSS, Node.js, Express, MongoDB, MySQL) Tj
+0 -28 Td
+(PROJECTS: Tara Typing, ShopNex, Food Delivery Web App, NexaAssist) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000059 00000 n 
+0000000116 00000 n 
+0000000227 00000 n 
+0000000709 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+787
+%%EOF

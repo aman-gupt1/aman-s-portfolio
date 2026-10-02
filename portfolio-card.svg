@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0A0F1D"/>
+    </linearGradient>
+
+    <!-- Border Glow Gradient -->
+    <linearGradient id="borderGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.8"/>
+      <stop offset="30%" stop-color="#3B82F6" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="#1D4ED8" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.6"/>
+    </linearGradient>
+
+    <!-- Text Gradient -->
+    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+
+    <!-- 3D Shadow Filters -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#000000" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#2563EB" flood-opacity="0.25"/>
+    </filter>
+
+    <filter id="ambientGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="40" result="blur"/>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.65; }
+    }
+    .floating-card {
+      animation: float 5s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .glow-circle {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    .text-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 42px;
+      letter-spacing: -0.5px;
+    }
+    .text-subtitle {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 2.5px;
+    }
+    .text-pill {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+    }
+  </style>
+
+  <!-- Ambient Light Behind Card -->
+  <ellipse cx="400" cy="210" rx="270" ry="120" fill="#2563EB" opacity="0.35" filter="url(#ambientGlow)" class="glow-circle"/>
+  <ellipse cx="560" cy="180" rx="140" ry="80" fill="#38BDF8" opacity="0.25" filter="url(#ambientGlow)" class="glow-circle"/>
+
+  <!-- 3D Pedestal Floor Shadow -->
+  <ellipse cx="400" cy="385" rx="270" ry="12" fill="#000000" opacity="0.35" filter="url(#ambientGlow)"/>
+
+  <!-- Floating 3D Card Container -->
+  <g class="floating-card">
+    
+    <!-- Outer 3D Card Base with Depth Shadow -->
+    <rect x="90" y="45" width="620" height="310" rx="28" fill="url(#cardBg)" filter="url(#cardShadow)"/>
+    
+    <!-- Outer Gradient Border -->
+    <rect x="90" y="45" width="620" height="310" rx="28" fill="none" stroke="url(#borderGlow)" stroke-width="2"/>
+
+    <!-- Subtle Inner Highlight Rim -->
+    <rect x="91" y="46" width="618" height="308" rx="27" fill="none" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="1"/>
+
+    <!-- Specular Light Effect Top Left -->
+    <path d="M 118 45 L 350 45 C 240 45, 140 85, 90 180 L 90 73 A 28 28 0 0 1 118 45 Z" fill="#FFFFFF" opacity="0.04"/>
+
+    <!-- Card Top Header Bar -->
+    <g transform="translate(125, 78)">
+      <!-- Window Controls -->
+      <circle cx="0" cy="0" r="5" fill="#EF4444" opacity="0.85"/>
+      <circle cx="16" cy="0" r="5" fill="#F59E0B" opacity="0.85"/>
+      <circle cx="32" cy="0" r="5" fill="#10B981" opacity="0.85"/>
+
+      <!-- Live Status Badge on Right -->
+      <g transform="translate(460, -9)">
+        <rect x="0" y="0" width="90" height="20" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <circle cx="12" cy="10" r="3.5" fill="#10B981"/>
+        <text x="24" y="14" fill="#94A3B8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">ACTIVE</text>
+      </g>
+    </g>
+
+    <!-- Center Content -->
+    <!-- Eyebrow Pill -->
+    <g transform="translate(400, 135)">
+      <rect x="-95" y="-12" width="190" height="24" rx="12" fill="#1E293B" stroke="#3B82F6" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" fill="#60A5FA" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.5">✦ MERN STACK DEV ✦</text>
+    </g>
+
+    <!-- Main Title: Aman's Portfolio -->
+    <text x="400" y="200" text-anchor="middle" fill="url(#titleGradient)" class="text-title">
+      Aman's Portfolio
+    </text>
+
+    <!-- Subtitle / Tagline -->
+    <text x="400" y="235" text-anchor="middle" fill="#94A3B8" class="text-subtitle">
+      MODERN • RESPONSIVE • FULL-STACK
+    </text>
+
+    <!-- Tech Badges / Pills -->
+    <g transform="translate(400, 290)">
+      <!-- React -->
+      <g transform="translate(-165, 0)">
+        <rect x="-35" y="-14" width="70" height="28" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <text x="0" y="4" text-anchor="middle" fill="#E2E8F0" class="text-pill">React</text>
+      </g>
+
+      <!-- Node.js -->
+      <g transform="translate(-80, 0)">
+        <rect x="-38" y="-14" width="76" height="28" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <text x="0" y="4" text-anchor="middle" fill="#E2E8F0" class="text-pill">Node.js</text>
+      </g>
+
+      <!-- Express -->
+      <g transform="translate(10, 0)">
+        <rect x="-40" y="-14" width="80" height="28" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <text x="0" y="4" text-anchor="middle" fill="#E2E8F0" class="text-pill">Express</text>
+      </g>
+
+      <!-- MongoDB -->
+      <g transform="translate(105, 0)">
+        <rect x="-44" y="-14" width="88" height="28" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <text x="0" y="4" text-anchor="middle" fill="#E2E8F0" class="text-pill">MongoDB</text>
+      </g>
+
+      <!-- Tailwind -->
+      <g transform="translate(195, 0)">
+        <rect x="-36" y="-14" width="72" height="28" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+        <text x="0" y="4" text-anchor="middle" fill="#E2E8F0" class="text-pill">Tailwind</text>
+      </g>
+    </g>
+
+  </g>
+</svg>

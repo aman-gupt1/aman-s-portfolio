@@ -1,0 +1,27 @@
+﻿# Dependencies
+node_modules/
+
+# Environment variables (CRITICAL: Do NOT commit secrets to GitHub)
+.env
+.env.*
+*.env
+*.env.local
+!.env.example
+
+# Local fallback data (contact messages submitted offline)
+data/
+messages.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS & Crash dumps
+.DS_Store
+Thumbs.db
+*.stackdump
+
+# Editor & IDE
+.vscode/
+.idea/
