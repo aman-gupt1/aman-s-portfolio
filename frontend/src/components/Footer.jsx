@@ -1,8 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { personalInfo } from '../data/about';
 import { LinkedInIcon, GitHubIcon, LeetCodeIcon } from './SocialLinks';
+
+const SOCIAL_LINKS = {
+  github: 'https://github.com/aman-gupt1',
+  linkedin: 'https://www.linkedin.com/in/amangupt1',
+  leetcode: 'https://leetcode.com/u/amangupta3110/',
+};
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -38,7 +43,7 @@ export const Footer = () => {
           <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap justify-center sm:justify-end">
             {/* GitHub Button */}
             <a
-              href={personalInfo.socials.github}
+              href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
@@ -50,7 +55,7 @@ export const Footer = () => {
 
             {/* LinkedIn Button */}
             <a
-              href={personalInfo.socials.linkedin}
+              href={SOCIAL_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
@@ -62,7 +67,7 @@ export const Footer = () => {
 
             {/* LeetCode Button */}
             <a
-              href={personalInfo.socials.leetcode}
+              href={SOCIAL_LINKS.leetcode}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LeetCode Profile"
