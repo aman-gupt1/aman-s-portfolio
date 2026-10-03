@@ -11,9 +11,11 @@ node_modules/
 !backend/.env.example
 
 # Local fallback data (protect visitor contact messages)
-data/
-data/messages.json
+/data/
 backend/data/
+messages.json
+!frontend/src/data/
+!frontend/src/data/**
 
 # Build outputs
 dist/
