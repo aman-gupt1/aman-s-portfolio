@@ -11,6 +11,67 @@ if (dns.setDefaultResultOrder) {
  * without crashing or failing the database save.
  */
 export const sendContactNotification = async ({ name, email, subject, message }) => {
+  // Option 1: Web3Forms HTTPS API (Port 443 - 100% reliable on Render Free Tier, never blocked!)
+  const web3Key = process.env.WEB3FORMS_ACCESS_KEY;
+  if (web3Key && web3Key.trim()) {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: web3Key.trim(),
+          name,
+          email,
+          subject: `📬 Portfolio Contact: ${subject || 'New Message'} from ${name}`,
+          message: `${message}\n\n---\nSent from Aman Gupta Portfolio Contact Form`,
+          from_name: `${name} (Portfolio)`,
+          replyto: email,
+        }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        console.log('✅ Email notification dispatched via Web3Forms HTTPS API!');
+        return { sent: true, provider: 'web3forms' };
+      }
+      console.warn('⚠️ Web3Forms responded with error:', data.message);
+    } catch (apiErr) {
+      console.error('Web3Forms dispatch error:', apiErr.message);
+    }
+  }
+
+  // Option 2: Resend API (HTTPS Port 443)
+  const resendKey = process.env.RESEND_API_KEY;
+  if (resendKey && resendKey.trim()) {
+    try {
+      const resendRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${resendKey.trim()}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Portfolio Contact <onboarding@resend.dev>',
+          to: ['amangupta276302@gmail.com'],
+          reply_to: email,
+          subject: `📬 Portfolio Contact: ${subject || 'New Message'} from ${name}`,
+          html: `<p><strong>From:</strong> ${name} (${email})</p><p><strong>Subject:</strong> ${subject}</p><p>${message}</p>`,
+        }),
+      });
+      const resendData = await resendRes.json();
+      if (resendRes.ok) {
+        console.log('✅ Email notification dispatched via Resend HTTPS API!');
+        return { sent: true, provider: 'resend', id: resendData.id };
+      }
+      console.warn('⚠️ Resend responded with error:', resendData.message);
+    } catch (resendErr) {
+      console.error('Resend dispatch error:', resendErr.message);
+    }
+  }
+
+  // Option 3: Nodemailer Gmail SMTP (Direct IPv4 Port 587)
   const emailUser = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : '';
   const emailPass = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '').trim() : '';
   const receiverEmail = (process.env.RECEIVER_EMAIL ? process.env.RECEIVER_EMAIL.trim() : '') || emailUser || 'amangupta276302@gmail.com';

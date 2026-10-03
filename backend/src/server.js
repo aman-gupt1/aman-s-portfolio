@@ -38,7 +38,11 @@ app.get('/', (req, res) => {
     success: true,
     message: 'Aman Gupta Portfolio API is live and operational!',
     database: getDBStatus() ? 'connected' : 'fallback-local-store',
-    emailConfigured: !!(process.env.EMAIL_USER && process.env.EMAIL_PASS),
+    emailConfigured: !!(
+      process.env.WEB3FORMS_ACCESS_KEY ||
+      process.env.RESEND_API_KEY ||
+      (process.env.EMAIL_USER && process.env.EMAIL_PASS)
+    ),
     endpoints: {
       health: '/api/health',
       contact: '/api/contact',
@@ -55,7 +59,11 @@ app.get('/api/health', (req, res) => {
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
     database: getDBStatus() ? 'connected' : 'fallback-local-store',
-    emailConfigured: !!(process.env.EMAIL_USER && process.env.EMAIL_PASS),
+    emailConfigured: !!(
+      process.env.WEB3FORMS_ACCESS_KEY ||
+      process.env.RESEND_API_KEY ||
+      (process.env.EMAIL_USER && process.env.EMAIL_PASS)
+    ),
     portfolio: 'Aman Gupta - Production MERN Stack',
   });
 });
