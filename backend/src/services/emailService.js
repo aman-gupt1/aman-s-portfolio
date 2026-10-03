@@ -22,21 +22,28 @@ export const sendContactNotification = async ({ name, email, subject, message })
     return { sent: false, reason: 'Credentials not set' };
   }
   try {
+    // Directly resolve IPv4 address to completely bypass Render's disabled IPv6 routing
+    let smtpHost = 'smtp.gmail.com';
+    try {
+      const ipv4List = await dns.promises.resolve4('smtp.gmail.com');
+      if (ipv4List && ipv4List.length > 0) {
+        smtpHost = ipv4List[0];
+      }
+    } catch (dnsErr) {
+      console.warn('DNS IPv4 resolution fallback:', dnsErr.message);
+    }
+
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: smtpHost,
       port: 465,
       secure: true,
-      family: 4, // Enforce IPv4 on cloud hosting (Render)
       auth: {
         user: emailUser,
         pass: emailPass, // Google 16-character App Password (spaces stripped)
       },
       tls: {
         rejectUnauthorized: false,
-        servername: 'smtp.gmail.com',
-      },
-      lookup: (hostname, options, callback) => {
-        return dns.lookup(hostname, { family: 4 }, callback);
+        servername: 'smtp.gmail.com', // Crucial for valid TLS handshake matching cert
       },
     });
 
