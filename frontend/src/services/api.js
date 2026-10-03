@@ -6,7 +6,35 @@ const rawBaseUrl =
 const API_BASE_URL = rawBaseUrl.replace(/\/+$/, '');
 
 
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY || '3e3581a5-876f-4b6b-8454-c7c1097dfaa2';
+
 export const sendContactMessage = async (data) => {
+  // 1. Dispatch real email notification directly to Aman's Gmail via Web3Forms HTTPS
+  // This bypasses cloud hosting SMTP blocks and guarantees instant inbox delivery
+  if (WEB3FORMS_KEY) {
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: data.name,
+          email: data.email,
+          subject: `📬 Portfolio Contact: ${data.subject || 'New Message'} from ${data.name}`,
+          message: data.message,
+          from_name: `${data.name} (Portfolio)`,
+          replyto: data.email,
+        }),
+      }).catch((e) => console.warn('Email notice:', e));
+    } catch (mailErr) {
+      console.warn('Web3Forms dispatch warning:', mailErr);
+    }
+  }
+
+  // 2. Persist record to MongoDB Atlas via Render Backend
   try {
     const response = await fetch(`${API_BASE_URL}/api/contact`, {
       method: 'POST',
