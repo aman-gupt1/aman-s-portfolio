@@ -26,6 +26,22 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Root Welcome Route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Aman Gupta Portfolio API is live and operational!',
+    database: getDBStatus() ? 'connected' : 'fallback-local-store',
+    emailConfigured: !!(process.env.EMAIL_USER && process.env.EMAIL_PASS),
+    endpoints: {
+      health: '/api/health',
+      contact: '/api/contact',
+      projects: '/api/projects',
+      skills: '/api/skills',
+    },
+  });
+});
+
 // Health Check Route
 app.get('/api/health', (req, res) => {
   res.status(200).json({
@@ -33,6 +49,7 @@ app.get('/api/health', (req, res) => {
     uptime: process.uptime(),
     timestamp: new Date().toISOString(),
     database: getDBStatus() ? 'connected' : 'fallback-local-store',
+    emailConfigured: !!(process.env.EMAIL_USER && process.env.EMAIL_PASS),
     portfolio: 'Aman Gupta - Production MERN Stack',
   });
 });

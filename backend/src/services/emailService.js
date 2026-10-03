@@ -16,13 +16,17 @@ export const sendContactNotification = async ({ name, email, subject, message })
     );
     return { sent: false, reason: 'Credentials not set in .env' };
   }
-
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: emailUser,
         pass: emailPass, // Google 16-character App Password
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
 
