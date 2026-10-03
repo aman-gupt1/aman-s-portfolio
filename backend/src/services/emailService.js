@@ -34,7 +34,7 @@ export const sendContactNotification = async ({ name, email, subject, message })
     }
 
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
+      host: smtpHost,
       port: 587,
       secure: false,
       requireTLS: true,
@@ -44,6 +44,7 @@ export const sendContactNotification = async ({ name, email, subject, message })
       },
       tls: {
         rejectUnauthorized: false,
+        servername: 'smtp.gmail.com',
       },
     });
 
