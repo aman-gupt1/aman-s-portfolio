@@ -27,16 +27,13 @@ export const sendContactMessage = async (data) => {
         },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          from_name: `Portfolio - ${data.name}`,
+          from_name: `${data.name} (Portfolio)`,
           subject: `📬 Portfolio Contact: "${data.subject || 'New Inquiry'}" from ${data.name}`,
+          replyto: data.email,
           name: data.name,
           email: data.email,
-          replyto: data.email,
-          "👤 Sender Name": data.name,
-          "📧 Sender Email": data.email,
-          "📝 Subject": data.subject || 'Portfolio Inquiry',
-          "🕒 Received On": `${formattedTime} (IST)`,
-          "💬 Message": data.message,
+          Subject: data.subject || 'Portfolio Inquiry',
+          Message: `${data.message}\n\n──────────────────────────────\n🕒 Received: ${formattedTime} (IST)\n💡 Click "Reply" to respond directly to ${data.name} (${data.email})`,
         }),
       });
       const web3Json = await web3Res.json();
