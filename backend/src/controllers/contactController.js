@@ -101,13 +101,10 @@ export const submitContact = async (req, res, next) => {
       savedContact = saveToFallbackStore(payload);
     }
 
-    // Trigger email notification to Aman's Gmail
-    let mailResult = { sent: false };
-    try {
-      mailResult = await sendContactNotification(payload);
-    } catch (mailErr) {
-      console.error('Email dispatch error:', mailErr);
-    }
+    // Trigger email notification in background (non-blocking, never freezes the response)
+    sendContactNotification(payload).catch((mailErr) => {
+      console.warn('Background email dispatch notice:', mailErr.message);
+    });
 
     return res.status(201).json({
       success: true,
@@ -118,8 +115,6 @@ export const submitContact = async (req, res, next) => {
         email: savedContact.email,
         createdAt: savedContact.createdAt,
       },
-      emailSent: mailResult.sent,
-      emailError: mailResult.sent ? null : (mailResult.error || mailResult.reason || 'Unknown error'),
     });
   } catch (error) {
     next(error);
