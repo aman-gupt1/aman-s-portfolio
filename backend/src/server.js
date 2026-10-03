@@ -1,6 +1,12 @@
+import dns from 'dns';
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
+// Force IPv4 DNS resolution to prevent ENETUNREACH errors on cloud hosting (Render)
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 import { connectDB, getDBStatus } from './config/db.js';
 import contactRoutes from './routes/contactRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';

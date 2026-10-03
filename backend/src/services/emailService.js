@@ -1,4 +1,9 @@
+import dns from 'dns';
 import nodemailer from 'nodemailer';
+
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder('ipv4first');
+}
 
 /**
  * Sends an email notification to Aman's Gmail whenever someone submits the contact form.
