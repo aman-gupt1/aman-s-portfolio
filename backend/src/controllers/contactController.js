@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import Contact from '../models/Contact.js';
 import { getDBStatus } from '../config/db.js';
+import { sendContactNotification } from '../services/emailService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -99,6 +100,11 @@ export const submitContact = async (req, res, next) => {
       // Gracefully persist to JSON file store
       savedContact = saveToFallbackStore(payload);
     }
+
+    // Trigger instant email notification to Aman's Gmail (non-blocking)
+    sendContactNotification(payload).catch((mailErr) => {
+      console.error('Async mail error:', mailErr);
+    });
 
     return res.status(201).json({
       success: true,

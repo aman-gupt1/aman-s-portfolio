@@ -69,16 +69,17 @@ export const Navbar = () => {
     >
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between w-full">
-          {/* Logo: Blue dot + Aman Gupta */}
+          {/* Brand Logo: AG Monogram Only */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2 group cursor-pointer shrink-0 transition-transform active:scale-95"
+            aria-label="Aman Gupta Portfolio Home"
+            className="group cursor-pointer shrink-0 transition-transform active:scale-95"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block transition-transform duration-200 group-hover:scale-125"></span>
-            <span className="text-lg lg:text-xl font-bold tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors duration-200">
-              Aman Gupta
-            </span>
+            {/* Stylish Monogram Logo Badge */}
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-black text-sm sm:text-base tracking-wider shadow-sm shadow-blue-500/25 group-hover:scale-105 group-hover:shadow-md group-hover:shadow-blue-500/35 transition-all duration-200 select-none">
+              AG
+            </div>
           </a>
 
           {/* Desktop Nav Links (Visible on >= 1024px) */}

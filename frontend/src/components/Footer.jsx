@@ -29,12 +29,14 @@ export const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           
           {/* Left: Name | Role */}
-          <div className="flex items-center gap-2.5">
-            <span className="font-bold text-slate-900 text-sm sm:text-base tracking-tight">
-              Aman Kr. Gupta
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 sm:gap-3">
+            <span className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight select-none">
+              Aman Kr. <span className="text-blue-600 font-extrabold">Gupta</span>
             </span>
-            <span className="text-slate-300 font-light select-none">|</span>
-            <span className="text-xs sm:text-sm font-medium text-slate-500">
+
+            <span className="hidden sm:inline-block h-4 w-px bg-slate-200 select-none" />
+
+            <span className="px-3 py-1 rounded-xl bg-slate-50 hover:bg-blue-50/70 border border-slate-200/90 hover:border-blue-200 text-slate-600 hover:text-blue-600 text-xs sm:text-xs font-semibold tracking-wide shadow-2xs transition-all duration-200 cursor-default">
               MERN Stack Developer
             </span>
           </div>
