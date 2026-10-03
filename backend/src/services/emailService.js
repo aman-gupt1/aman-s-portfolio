@@ -34,16 +34,16 @@ export const sendContactNotification = async ({ name, email, subject, message })
     }
 
     const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: 465,
-      secure: true,
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
+      requireTLS: true,
       auth: {
         user: emailUser,
         pass: emailPass, // Google 16-character App Password (spaces stripped)
       },
       tls: {
         rejectUnauthorized: false,
-        servername: 'smtp.gmail.com', // Crucial for valid TLS handshake matching cert
       },
     });
 
