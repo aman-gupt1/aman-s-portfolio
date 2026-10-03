@@ -101,10 +101,13 @@ export const submitContact = async (req, res, next) => {
       savedContact = saveToFallbackStore(payload);
     }
 
-    // Trigger instant email notification to Aman's Gmail (non-blocking)
-    sendContactNotification(payload).catch((mailErr) => {
-      console.error('Async mail error:', mailErr);
-    });
+    // Trigger email notification to Aman's Gmail
+    let mailResult = { sent: false };
+    try {
+      mailResult = await sendContactNotification(payload);
+    } catch (mailErr) {
+      console.error('Email dispatch error:', mailErr);
+    }
 
     return res.status(201).json({
       success: true,
@@ -115,6 +118,7 @@ export const submitContact = async (req, res, next) => {
         email: savedContact.email,
         createdAt: savedContact.createdAt,
       },
+      emailSent: mailResult.sent,
     });
   } catch (error) {
     next(error);

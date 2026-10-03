@@ -6,24 +6,25 @@ import nodemailer from 'nodemailer';
  * without crashing or failing the database save.
  */
 export const sendContactNotification = async ({ name, email, subject, message }) => {
-  const emailUser = process.env.EMAIL_USER;
-  const emailPass = process.env.EMAIL_PASS;
-  const receiverEmail = process.env.RECEIVER_EMAIL || emailUser || 'amangupta276302@gmail.com';
+  const emailUser = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : '';
+  const emailPass = process.env.EMAIL_PASS ? process.env.EMAIL_PASS.replace(/\s+/g, '').trim() : '';
+  const receiverEmail = (process.env.RECEIVER_EMAIL ? process.env.RECEIVER_EMAIL.trim() : '') || emailUser || 'amangupta276302@gmail.com';
 
   if (!emailUser || !emailPass) {
     console.warn(
-      '⚠️ [Email Service] EMAIL_USER or EMAIL_PASS not configured in .env. Email dispatch skipped. (Message safely preserved in database).'
+      '⚠️ [Email Service] EMAIL_USER or EMAIL_PASS not configured. Email dispatch skipped. (Message safely preserved in database).'
     );
-    return { sent: false, reason: 'Credentials not set in .env' };
+    return { sent: false, reason: 'Credentials not set' };
   }
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
       secure: true,
+      family: 4, // Enforce IPv4 on cloud hosting (Render)
       auth: {
         user: emailUser,
-        pass: emailPass, // Google 16-character App Password
+        pass: emailPass, // Google 16-character App Password (spaces stripped)
       },
       tls: {
         rejectUnauthorized: false,
