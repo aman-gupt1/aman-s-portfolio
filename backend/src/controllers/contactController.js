@@ -119,6 +119,7 @@ export const submitContact = async (req, res, next) => {
         createdAt: savedContact.createdAt,
       },
       emailSent: mailResult.sent,
+      emailError: mailResult.sent ? null : (mailResult.error || mailResult.reason || 'Unknown error'),
     });
   } catch (error) {
     next(error);
