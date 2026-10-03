@@ -1,5 +1,10 @@
-const rawBaseUrl = import.meta.env.VITE_API_URL || '';
+const rawBaseUrl =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.PROD
+    ? 'https://aman-s-portfolio-backend.onrender.com'
+    : '');
 const API_BASE_URL = rawBaseUrl.replace(/\/+$/, '');
+
 
 export const sendContactMessage = async (data) => {
   try {
