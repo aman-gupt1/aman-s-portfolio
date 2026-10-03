@@ -33,6 +33,10 @@ export const sendContactNotification = async ({ name, email, subject, message })
       },
       tls: {
         rejectUnauthorized: false,
+        servername: 'smtp.gmail.com',
+      },
+      lookup: (hostname, options, callback) => {
+        return dns.lookup(hostname, { family: 4 }, callback);
       },
     });
 
