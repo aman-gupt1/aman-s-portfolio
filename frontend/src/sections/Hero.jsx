@@ -23,15 +23,21 @@ export const Hero = () => {
           
           {/* Left Column: Hero Content */}
           <div className="lg:col-span-6 xl:col-span-7 flex flex-col justify-center z-10">
-            {/* Greeting pill */}
+            {/* Greeting pill with animated rotating lighting border */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.1, ease: 'easeOut' }}
-              className="inline-flex items-center gap-1.5 self-start px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-100 text-blue-700 text-xs font-semibold mb-4 shadow-2xs hover:bg-blue-100/70 transition-colors"
+              className="relative inline-flex self-start overflow-hidden rounded-full p-[1.5px] mb-4 shadow-xs"
             >
-              <span className="text-sm">👋</span>
-              <span>Hello, I'm</span>
+              {/* Rotating lightning beam */}
+              <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#BFDBFE_0%,#2563EB_50%,#60A5FA_70%,#BFDBFE_100%)]" />
+
+              {/* Inner pill content */}
+              <span className="relative inline-flex items-center gap-1.5 rounded-full bg-blue-50/95 px-3.5 py-1.5 text-xs font-semibold text-blue-700 backdrop-blur-xs">
+                <span className="text-sm select-none">👋</span>
+                <span>Hello, I'm</span>
+              </span>
             </motion.div>
 
             {/* Name */}
