@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, X, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, X, CheckCircle2, ArrowRight } from 'lucide-react';
 import { SectionHeading } from '../components/SectionHeading';
 import { GitHubIcon } from '../components/SocialLinks';
 import { projectsData } from '../data/projects';
 
 export const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const displayedProjects = showAll ? projectsData : projectsData.slice(0, 2);
 
   return (
     <section id="projects" className="py-14 md:py-18 bg-white">
@@ -14,33 +17,26 @@ export const Projects = () => {
         <SectionHeading
           eyebrow="PROJECTS"
           title="Featured Projects"
-          actionText="View All Projects"
-          actionHref="https://github.com/aman-gupt1?tab=repositories"
+          actionText={showAll ? "Show Less" : "View All Projects"}
+          onAction={() => setShowAll((prev) => !prev)}
         />
 
-        {/* 2-Column Projects Grid - Staggered scroll reveal */}
+        {/* Projects Grid */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.12 },
-            },
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto"
+          layout
+          className={`grid grid-cols-1 md:grid-cols-2 ${showAll ? 'lg:grid-cols-3 max-w-6xl' : 'max-w-5xl'} gap-6 lg:gap-8 mx-auto transition-all duration-300`}
         >
-          {projectsData.map((project) => (
-            <motion.div
-              key={project.id}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
-              }}
-              className="bg-white rounded-2xl border border-slate-100 shadow-subtle hover:shadow-card hover:-translate-y-1.5 hover:border-blue-100/80 transition-all duration-300 overflow-hidden flex flex-col group"
-            >
+          <AnimatePresence>
+            {displayedProjects.map((project) => (
+              <motion.div
+                layout
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="bg-white rounded-2xl border border-slate-100 shadow-subtle hover:shadow-card hover:-translate-y-1.5 hover:border-blue-100/80 transition-all duration-300 overflow-hidden flex flex-col group"
+              >
               {/* Image Preview Container */}
               <div
                 onClick={() => setSelectedProject(project)}
@@ -120,7 +116,19 @@ export const Projects = () => {
               </div>
             </motion.div>
           ))}
+          </AnimatePresence>
         </motion.div>
+
+        {/* Mobile/Bottom Toggle Button */}
+        <div className="mt-8 flex justify-center sm:hidden">
+          <button
+            onClick={() => setShowAll((prev) => !prev)}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-teal-50/50 text-slate-900 hover:text-teal-800 font-bold text-xs border-2 border-teal-600 hover:border-teal-700 shadow-xs active:scale-95 transition-all duration-200 cursor-pointer"
+          >
+            <span>{showAll ? "Show Less" : "View All Projects (3)"}</span>
+            <ArrowRight className={`w-4 h-4 text-teal-600 transition-transform duration-200 ${showAll ? '-rotate-90' : 'rotate-90'}`} />
+          </button>
+        </div>
       </div>
 
       {/* Project Detail Modal */}

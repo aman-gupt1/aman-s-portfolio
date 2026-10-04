@@ -41,19 +41,29 @@ export const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
-      const navOffset = 70;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-      setActiveSection(targetId);
+    const scrollToSection = () => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const navOffset = 70;
+        const bodyTop = document.body.getBoundingClientRect().top;
+        const elementTop = element.getBoundingClientRect().top;
+        const offsetPosition = Math.max(0, elementTop - bodyTop - navOffset);
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+        setActiveSection(targetId);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+      setTimeout(scrollToSection, 120);
+    } else {
+      scrollToSection();
     }
-    setMobileMenuOpen(false);
   };
 
   return (
@@ -175,6 +185,7 @@ export const Navbar = () => {
                 <a
                   href="/aman-gupta-resume.pdf"
                   download="Aman_Gupta_Resume.pdf"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-colors"
                 >
                   <span>Download Resume</span>
