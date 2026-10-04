@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Globe, BarChart2 } from 'lucide-react';
+import { ArrowRight, Globe, BarChart2, Download } from 'lucide-react';
 import heroImg from '../assets/hero-person.png';
-import { SocialLinks, GitHubIcon } from '../components/SocialLinks';
+import { SocialLinks } from '../components/SocialLinks';
 import { personalInfo } from '../data/about';
 
 export const Hero = () => {
@@ -80,14 +80,16 @@ export const Hero = () => {
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
               </a>
 
+              {/* Download Resume Button (Replaced GitHub button) */}
               <a
-                href={personalInfo.socials.github}
+                href="/aman-gupta-resume.pdf"
+                download="Aman_Gupta_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-900 font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+                className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 text-slate-900 hover:text-blue-600 font-semibold text-xs sm:text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
               >
-                <GitHubIcon className="w-4 h-4 text-slate-900 transition-transform duration-200 group-hover:scale-110 shrink-0" />
-                <span>GitHub</span>
+                <Download className="w-4 h-4 text-blue-600 transition-transform duration-200 group-hover:translate-y-0.5 shrink-0" />
+                <span>Download Resume</span>
               </a>
             </motion.div>
 
