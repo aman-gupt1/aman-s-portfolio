@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, Menu, X } from 'lucide-react';
+import { Download, Menu, X, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const NAV_ITEMS = [
@@ -120,15 +120,25 @@ export const Navbar = () => {
             })}
           </nav>
 
-          {/* Desktop Resume CTA Button (Visible on >= 1024px) */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop Resume CTA Buttons (Visible on >= 1024px) */}
+          <div className="hidden lg:flex items-center gap-2">
+            <a
+              href="/aman-gupta-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 px-4 py-2 text-xs lg:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+            >
+              <span>View Resume</span>
+              <ExternalLink className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
             <a
               href="/aman-gupta-resume.pdf"
               download="Aman_Gupta_Resume.pdf"
-              className="group inline-flex items-center gap-2 px-4 py-2 text-xs lg:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
+              className="p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 active:scale-95 rounded-lg border border-slate-200 hover:border-blue-200 transition-all shadow-2xs cursor-pointer"
+              title="Download Resume PDF"
+              aria-label="Download Resume PDF"
             >
-              <span>Download Resume</span>
-              <Download className="w-4 h-4 transition-transform duration-200 group-hover:translate-y-0.5" />
+              <Download className="w-4 h-4" />
             </a>
           </div>
 
@@ -136,11 +146,13 @@ export const Navbar = () => {
           <div className="flex lg:hidden items-center gap-2 shrink-0">
             <a
               href="/aman-gupta-resume.pdf"
-              download="Aman_Gupta_Resume.pdf"
-              className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 active:scale-95 rounded-lg transition-all"
-              aria-label="Download Resume"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 active:scale-95 rounded-lg transition-all cursor-pointer"
+              aria-label="View Resume"
+              title="View Resume"
             >
-              <Download className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4" />
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -181,15 +193,27 @@ export const Navbar = () => {
                   </a>
                 );
               })}
-              <div className="pt-3 px-3">
+              <div className="pt-3 px-3 flex flex-col gap-2">
+                <a
+                  href="/aman-gupta-resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-colors cursor-pointer"
+                >
+                  <span>View Resume</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
                 <a
                   href="/aman-gupta-resume.pdf"
                   download="Aman_Gupta_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer"
                 >
-                  <span>Download Resume</span>
-                  <Download className="w-4 h-4" />
+                  <span>Download PDF</span>
+                  <Download className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>
