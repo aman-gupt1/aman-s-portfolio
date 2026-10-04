@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, ExternalLink } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { personalInfo } from '../data/about';
 
 export const LeetCodeIcon = ({ className = 'w-5 h-5' }) => (
@@ -66,20 +66,10 @@ export const SocialLinks = ({ variant = 'hero', className = '' }) => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LeetCode"
-          title="LeetCode Profile"
-          className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 hover:bg-amber-500 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 shadow-sm hover:shadow-md"
+          className="h-9 px-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:border-amber-400 hover:text-slate-900 flex items-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 shadow-sm hover:shadow-md text-xs font-semibold"
         >
           <LeetCodeIcon className="w-4 h-4" />
-        </a>
-        <a
-          href="/aman-gupta-resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="View Resume"
-          className="h-9 px-3.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 hover:border-blue-400 hover:text-blue-600 flex items-center gap-1.5 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 shadow-sm hover:shadow-md text-xs font-semibold group cursor-pointer"
-        >
-          <ExternalLink className="w-3.5 h-3.5 text-blue-600 transition-transform duration-200 group-hover:scale-110" />
-          <span>View Resume</span>
+          <span>LeetCode</span>
         </a>
       </div>
     );

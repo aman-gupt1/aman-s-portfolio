@@ -148,11 +148,11 @@ export const Navbar = () => {
               href="/aman-gupta-resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-blue-600 bg-blue-50 hover:bg-blue-100 active:scale-95 rounded-lg transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 active:scale-95 rounded-lg shadow-xs transition-all cursor-pointer"
               aria-label="View Resume"
-              title="View Resume"
             >
-              <ExternalLink className="w-4 h-4" />
+              <span>View Resume</span>
+              <ExternalLink className="w-3.5 h-3.5" />
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
